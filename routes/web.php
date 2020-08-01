@@ -19,9 +19,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('dashboard');
-
+Route::get('users', 'UsersController@index');
+Route::get('users-list', 'UsersController@usersList'); 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
+	
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::patch('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::patch('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
